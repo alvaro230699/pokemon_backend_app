@@ -25,10 +25,10 @@ class helperPokemonClass {
 
   static async get_all_pokemons (cache, offset) {
     try {
-      let PokemonsCount = cache.get('PokemonsCount')
+      let PokemonsCount = cache.get('pokemonsCount')
       if (!PokemonsCount) {
         PokemonsCount = await this.get_pokemons_count()
-        cache.set('PokemonsCount', PokemonsCount)
+        cache.set('pokemonsCount', PokemonsCount)
       }
       const pokemonData = await this.get_pokemons(PokemonsCount, offset)
       cache.set('allPokemons', pokemonData)
@@ -36,6 +36,14 @@ class helperPokemonClass {
     } catch (error) {
       throw new Error(error)
     }
+  }
+
+  static sort_strings_values (string1, string2, type = 'asc') {
+    const fa = string1.toLowerCase()
+    const fb = string2.toLowerCase()
+    if (fa < fb) return (type === 'asc') ? -1 : 1
+    if (fa > fb) return (type === 'asc') ? 1 : -1
+    return 0
   }
 }
 module.exports = helperPokemonClass

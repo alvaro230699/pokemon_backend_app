@@ -1,1 +1,1 @@
-GET http://localhost:3000/api/mew
+GET http://localhost:3000/api/me?getAll=true
