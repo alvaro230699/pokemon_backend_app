@@ -4,16 +4,19 @@
   "description": "There is a backend app to query pokemons",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js",
+    "start": "NODE_ENV=production node app.js",
+    "dev": "NODE_ENV=development nodemon app.js",
     "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test jest --verbose --silent tests/pokemon.test.js",
+    "test:watch": "npm run test -- --watch"
   },
   "author": "Alvaro Neyra",
   "license": "MIT",
   "devDependencies": {
+    "jest": "28.1.3",
     "nodemon": "2.0.19",
-    "standard": "17.0.0"
+    "standard": "17.0.0",
+    "supertest": "6.2.4"
   },
   "dependencies": {
     "axios": "0.27.2",
@@ -24,6 +27,12 @@
     "winston": "3.8.1"
   },
   "eslintConfig": {
-    "extends": "./node_modules/standard/eslintrc.json"
+    "extends": "./node_modules/standard/eslintrc.json",
+    "env": {
+      "jest": true
+    }
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }

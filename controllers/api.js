@@ -46,7 +46,7 @@ router.get('/:keyword', async (request, response) => {
       return pokemon.name.match(re)
     })
     const pageCount = Math.ceil(matchedPokemons.length / limit)
-    if (pageCount === 1) {
+    if ([0, 1].includes(pageCount)) {
       nextPage = null
     }
     matchedPokemons.sort((a, b) => {
@@ -88,7 +88,7 @@ router.get('/includes/:keyword', async (request, response) => {
       return pokemonHelper.sort_strings_values(a.name, b.name, 'asc')
     })
     const pageCount = Math.ceil(matchedPokemons.length / limit)
-    if (pageCount === 1) {
+    if ([0, 1].includes(pageCount)) {
       nextPage = null
     }
     return response.status(200).json({
